@@ -49,6 +49,7 @@ class Classification(EvaluatorBase):
         # mo (torch.Tensor): model output [batch, num_classes]
         # gt (torch.LongTensor): ground truth [batch]
         pred = mo.max(1)[1]
+        print("predictions:", pred)
         matches = pred.eq(gt).float()
         # global L
         # L.append(gt)
