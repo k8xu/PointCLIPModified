@@ -14,6 +14,7 @@ CFG=rn101
 NUM_SHOTS=16
 
 export CUDA_VISIBLE_DEVICES=0
+export CUDA_LAUNCH_BLOCKING=1
 python train.py \
 --root ${DATA} \
 --trainer ${TRAINER} \
