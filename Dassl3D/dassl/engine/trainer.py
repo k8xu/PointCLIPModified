@@ -352,7 +352,8 @@ class SimpleTrainer(TrainerBase):
         self.train_loader_u = self.dm.train_loader_u
         self.val_loader = self.dm.val_loader
         self.test_loader = self.dm.test_loader
-        self.num_classes = 40
+        # self.num_classes = 40
+        self.num_classes = 46
 
     def build_model(self):
         """Build and register model.
