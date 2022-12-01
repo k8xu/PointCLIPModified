@@ -20,5 +20,5 @@ python train.py \
 --model-dir ckpt \
 --no-train \
 --eval-only \
---post-search
+# --post-search # Not sure what this is and probably don't need it
 
