@@ -108,17 +108,19 @@ def main(args):
 
     if args.eval_only:
         trainer.load_model(args.model_dir, epoch=args.load_epoch)
-        trainer.test()
+        results, pred = trainer.test()
 
     if args.zero_shot:
         trainer.test_zs()
 
-    if args.post_search:
+    if args.post_search: # BRITNEY: we shouldn't be doing post search so we'll never return None
         if args.zero_shot:
             search_weights_zs(cfg)
         else:
             search_weights_fs(cfg)
         return
+
+    return pred
     
 
 if __name__ == '__main__':

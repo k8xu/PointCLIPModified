@@ -462,7 +462,7 @@ class SimpleTrainer(TrainerBase):
         for batch_idx, batch in enumerate(data_loader):
             input, label = self.parse_batch_test(batch)
             output = self.model_inference(input, label)
-            self.evaluator.process(output, label)
+            pred = self.evaluator.process(output, label)
         results = self.evaluator.evaluate()
 
         for k, v in results.items():
@@ -470,7 +470,7 @@ class SimpleTrainer(TrainerBase):
             self.write_scalar(tag, v, self.epoch)
 
         
-        return list(results.values())[0]
+        return list(results.values())[0], pred
 
     @torch.no_grad()
     def test_zs(self, split=None):

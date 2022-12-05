@@ -252,9 +252,11 @@ class PCViews:
 
         self.num_views = 10
         
-        angle = torch.tensor(_views[:, 0, :]).float().cuda()
+        # angle = torch.tensor(_views[:, 0, :]).float().cuda()
+        angle = torch.tensor(_views[:, 0, :]).float() # kate changed this
         self.rot_mat = euler2mat(angle).transpose(1, 2)
-        self.translation = torch.tensor(_views[:, 1, :]).float().cuda()
+        self.translation = torch.tensor(_views[:, 1, :]).float() # kate changed this
+        # self.translation = torch.tensor(_views[:, 1, :]).float().cuda()
         self.translation = self.translation.unsqueeze(1)
 
     def get_img(self, points):

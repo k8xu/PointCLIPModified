@@ -84,7 +84,7 @@ class Textual_Encoder(nn.Module):
         temp = CUSTOM_TEMPLATES[self.cfg.DATASET.NAME]
         prompts = [temp.format(c.replace('_', ' ')) for c in self.classnames]
         prompts = torch.cat([clip.tokenize(p) for p in prompts])
-        prompts = prompts.cuda()
+        # prompts = prompts.cuda() # kate changed this
         text_feat = self.clip_model.encode_text(prompts).repeat(1, self.cfg.MODEL.PROJECT.NUM_VIEWS)
         return text_feat
 
@@ -141,7 +141,8 @@ class PointCLIP_Model(nn.Module):
         return logits
 
     def mv_proj(self, pc):
-        img = self.get_img(pc).cuda()
+        # img = self.get_img(pc).cuda()
+        img = self.get_img(pc) # kate changed this
         img = img.unsqueeze(1).repeat(1, 3, 1, 1)
         return img
 
@@ -229,10 +230,10 @@ class PointCLIP_FS(TrainerX):
 
         self.register_model('adapter', self.model.adapter, self.optim, self.sched)
 
-        device_count = torch.cuda.device_count()
-        if device_count > 1:
-            print(f'Multiple GPUs detected (n_gpus={device_count}), use all of them!')
-            self.model = nn.DataParallel(self.model)
+        # device_count = torch.cuda.device_count() # kate changed this
+        # if device_count > 1:
+        #     print(f'Multiple GPUs detected (n_gpus={device_count}), use all of them!')
+        #     self.model = nn.DataParallel(self.model)
 
     def forward_backward(self, batch):
         image, label = self.parse_batch_train(batch)

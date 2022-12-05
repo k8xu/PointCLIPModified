@@ -64,6 +64,7 @@ class Classification(EvaluatorBase):
                 label = label.item()
                 matches_i = int(matches[i].item())
                 self._per_class_res[label].append(matches_i)
+        return pred
 
     def evaluate(self):
         results = OrderedDict()
