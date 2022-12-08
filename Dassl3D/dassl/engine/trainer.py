@@ -353,7 +353,7 @@ class SimpleTrainer(TrainerBase):
         self.val_loader = self.dm.val_loader
         self.test_loader = self.dm.test_loader
         # self.num_classes = 40
-        self.num_classes = 6
+        self.num_classes = 5
 
     def build_model(self):
         """Build and register model.
@@ -462,7 +462,8 @@ class SimpleTrainer(TrainerBase):
         for batch_idx, batch in enumerate(data_loader):
             input, label = self.parse_batch_test(batch)
             output = self.model_inference(input, label)
-            pred = self.evaluator.process(output, label)
+            pred = self.evaluator.process(output, label) # kate changed this
+            # self.evaluator.process(output, label)
         results = self.evaluator.evaluate()
 
         for k, v in results.items():
@@ -470,7 +471,8 @@ class SimpleTrainer(TrainerBase):
             self.write_scalar(tag, v, self.epoch)
 
         
-        return list(results.values())[0], pred
+        return list(results.values())[0], pred # kate changed this
+        # return list(results.values())[0]
 
     @torch.no_grad()
     def test_zs(self, split=None):
